@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/base/base",
-    "pages/cloud/cloud"
+    "pages/cloud/cloud",
+    "pages/base/base"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

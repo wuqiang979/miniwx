@@ -1,1 +1,4 @@
-/* pages/cloud/cloud.wxss */
+/* miniprogram/pages/cloud/cloud.wxss */
+button{
+  width: 100%;
+}

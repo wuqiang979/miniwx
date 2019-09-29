@@ -1,4 +1,4 @@
-// pages/base/base.js
+// miniprogram/pages/base/base.js
 Page({
 
   /**
