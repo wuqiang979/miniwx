@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    images: []
   },
 
   insert: function() {
@@ -109,7 +109,7 @@ Page({
         const tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths)
         wx.cloud.uploadFile({
-          cloudPath: 'example.png',
+          cloudPath: new Date().getTime() + '.png',
           filePath: tempFilePaths[0], // 文件路径
           success: res => {
             // get resource ID
@@ -130,6 +130,48 @@ Page({
             // handle error
           }
         })
+      }
+    })
+  },
+  getFile(){
+    wx.cloud.callFunction({
+      name: 'login'
+    }).then(res=>{
+      db.collection('images')
+      .where({
+        '_openid': res.result.openid
+      })
+      .get()
+      .then(res2=>{
+        console.log(res2)
+        this.setData({
+          images: res2.data
+        })
+      })
+    })
+  },
+  downloadFile(event){
+    console.log(event)
+    wx.cloud.downloadFile({
+      fileID: event.target.dataset.fileid,
+      success: res => {
+        // get temp file path
+        console.log(res.tempFilePath)
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+            wx.showToast({
+              title: '保存成功'
+            })
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
+      },
+      fail: err => {
+        // handle error
+        console.log(err)
       }
     })
   },

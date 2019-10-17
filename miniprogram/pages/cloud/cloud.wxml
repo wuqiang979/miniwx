@@ -10,3 +10,8 @@
 <button bindtap="batchDelete">批量删除数据</button>
 <view>云存储</view>
 <button bindtap="upload">上传图片</button>
+<button bindtap="getFile">文件展示</button>
+<block wx:for="{{images}}" wx:key="{{index}}">
+  <image src="{{item.fileID}}"></image>
+  <button size="mini" data-fileid="{{item.fileID}}" bindtap="downloadFile">文件下载</button>
+</block>
